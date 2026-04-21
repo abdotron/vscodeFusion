@@ -1,0 +1,95 @@
+{
+  "name": "fusion-sql",
+  "displayName": "Fusion SQL Worksheet",
+  "description": "Run SQL against Oracle Fusion (BI Publisher) from a VS Code worksheet.",
+  "version": "1.0.0",
+  "publisher": "tmr",
+  "engines": { "vscode": "^1.84.0" },
+  "categories": ["Other"],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "fusionSql",
+          "title": "Fusion SQL",
+          "icon": "resources/fusion.svg"
+        }
+      ]
+    },
+    "views": {
+      "fusionSql": [
+        { "id": "fusionSql.connections", "name": "Connections" }
+      ]
+    },
+    "commands": [
+      { "command": "fusionSql.addConnection",    "title": "Fusion: Add Connection",    "icon": "$(add)" },
+      { "command": "fusionSql.deleteConnection", "title": "Fusion: Delete Connection", "icon": "$(trash)" },
+      { "command": "fusionSql.editConnection",   "title": "Fusion: Edit Connection",   "icon": "$(edit)" },
+      { "command": "fusionSql.openWorksheet",    "title": "Fusion: Open New Worksheet","icon": "$(notebook)" },
+      { "command": "fusionSql.runQuery",         "title": "Fusion: Run Query",         "icon": "$(play)" },
+      { "command": "fusionSql.refresh",          "title": "Fusion: Refresh",           "icon": "$(refresh)" }
+    ],
+    "menus": {
+      "view/title": [
+        { "command": "fusionSql.addConnection", "when": "view == fusionSql.connections", "group": "navigation" },
+        { "command": "fusionSql.refresh",       "when": "view == fusionSql.connections", "group": "navigation" }
+      ],
+      "view/item/context": [
+        { "command": "fusionSql.openWorksheet",    "when": "view == fusionSql.connections && viewItem == fusionConnection", "group": "inline" },
+        { "command": "fusionSql.editConnection",   "when": "view == fusionSql.connections && viewItem == fusionConnection" },
+        { "command": "fusionSql.deleteConnection", "when": "view == fusionSql.connections && viewItem == fusionConnection" }
+      ],
+      "editor/title": [
+        { "command": "fusionSql.runQuery", "when": "resourceExtname == .fusionsql", "group": "navigation" }
+      ],
+      "commandPalette": [
+        { "command": "fusionSql.runQuery", "when": "resourceExtname == .fusionsql" }
+      ]
+    },
+    "keybindings": [
+      { "command": "fusionSql.runQuery", "key": "ctrl+enter",        "mac": "cmd+enter", "when": "editorTextFocus && resourceExtname == .fusionsql" },
+      { "command": "fusionSql.runQuery", "key": "f5",                                     "when": "editorTextFocus && resourceExtname == .fusionsql" }
+    ],
+    "languages": [
+      {
+        "id": "sql",
+        "extensions": [".fusionsql"],
+        "aliases": ["Fusion SQL"]
+      }
+    ],
+    "configuration": {
+      "title": "Fusion SQL",
+      "properties": {
+        "fusionSql.defaultRowLimit": {
+          "type": "number",
+          "default": 500,
+          "description": "Default max rows returned per query (0 = unlimited)."
+        },
+        "fusionSql.verbose": {
+          "type": "boolean",
+          "default": false,
+          "description": "Log raw SOAP request/response to the Output panel."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p .",
+    "watch":   "tsc -w -p .",
+    "vscode:prepublish": "npm run compile",
+    "vsix":    "npm run compile && node build-vsix.js",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node":   "^20.11.0",
+    "@types/vscode": "^1.84.0",
+    "typescript":    "^5.4.0"
+  },
+  "dependencies": {
+    "fast-xml-parser": "^4.3.5"
+  }
+}
