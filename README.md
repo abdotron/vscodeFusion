@@ -2,9 +2,7 @@
 # Fusion SQL Worksheet for VS Code
 
 A VS Code extension that lets you run SQL against Oracle Fusion (SaaS) via BI
-Publisher — same workflow as the `TMR_COMMON_UTIL_PKG.create_and_run_dynamic_report`
-PL/SQL procedure, but done entirely from VS Code. No Oracle database,
-no APEX, no SQL Developer JDBC workaround.
+Publisher — 
 
 ## How it works
 
