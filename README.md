@@ -55,7 +55,7 @@ Produces `fusion-sql-1.0.0.vsix`. Install it:
    - Name (your handle, e.g. `FUSION-DEV`)
    - URL (e.g. `https://eenp-dev1.fa.ocs.oraclecloud.com`)
    - Username, password
-   - BIP data source reference (usually `demo`)
+   - BIP data source reference (usually data source( ApplicationDB_FSCM,or ApplicationDB_HCM or ApplicationDB_CRM))
 3. Click the connection to open a new worksheet. It's a plain `.fusionsql`
    file with a header comment naming the connection — edit freely, use all
    of VS Code's SQL editing features.
