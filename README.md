@@ -1,3 +1,4 @@
+
 # Fusion SQL Worksheet for VS Code
 
 A VS Code extension that lets you run SQL against Oracle Fusion (SaaS) via BI
@@ -20,6 +21,8 @@ no APEX, no SQL Developer JDBC workaround.
 Passwords are stored in VS Code's **secret storage** (OS keychain on macOS /
 Credential Manager on Windows / libsecret on Linux) — never on disk in plain
 text.
+## use the extension
+vS Code → Extensions view → … menu → Install from VSIX… → pick the file.
 
 ## Build from source
 
